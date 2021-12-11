@@ -1,0 +1,18 @@
+ p{
+        width: 90%;
+        margin: 0 5%;
+        text-align: center;
+    }
+
+    h1 .P2{
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+    }
+    ul{
+        width: 100vw;
+        text-align: center;
+    }
+    li{
+        margin-bottom: 40px;
+    }
