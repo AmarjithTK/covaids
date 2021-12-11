@@ -10,9 +10,21 @@
         display: block;
     }
     ul{
-        width: 100vw;
+        width: 96vw;
+        margin:0 2vw;
         text-align: center;
     }
     li{
         margin-bottom: 40px;
+    }
+    
+    span.Bullet_20_Symbols{
+    
+        font-size:25px;
+        margin-right:20px;
+    
+    }
+    
+    .T40{
+        font-size:2rem;
     }
