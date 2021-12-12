@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informed Consent</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="hero has-background-warning	">
+        <div class="hero-body has-text-centered">
+            <p class="title">
+                Covidiots Covid 19 Facts Kerala 
+            </p>
+            <p class="subtitle">
+                Short bullet points to explain the scam going on to coersive people
+            </p>
+
+        </div>
+    </section>
+
+
+    <section class="section data has-background-grey">
+        <ul class="ul">
+
+        </ul>
+    </section>
+
+
+    <script>
+
+        fetch('https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/coaid.json').then(data => data.json()).
+            then(json => updateData(json))
+
+
+        function updateData(data) {
+            const ul = document.querySelector('.ul')
+
+            data.forEach(element => {
+
+                console.log(element);
+                ul.innerHTML += `          <div class="container">
+                    <div class="box mb-2 has-text-centered">${element}</div>
+                    </div>
+`
+            });
+
+
+        }
+
+        //   const ul = document.querySelector('.ul');
+
+    </script>
+</body>
+
+</html>
