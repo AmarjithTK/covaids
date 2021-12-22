@@ -12,10 +12,13 @@
 
 <body>
 
+
     <section class="hero has-background-warning	">
+        <button class="button is-primary" id="langtrigger" data-eng="true"> Malayalam Version</button>
+
         <div class="hero-body has-text-centered">
             <p class="title">
-                Covidiots Covid 19 Facts Kerala 
+                Covidiots Covid 19 Facts Kerala
             </p>
             <p class="subtitle">
                 Short bullet points to explain the scam going on to coersive people
@@ -25,36 +28,111 @@
     </section>
 
 
-    <section class="section data has-background-grey">
+    <section class="section has-background-grey">
         <ul class="ul">
+
+            <div class="columns">
+                <div class="column  ul-container"></div>
+            </div>
 
         </ul>
     </section>
 
 
     <script>
+        // fetch('https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/coaid.json').then(data => data.json()).
+        // then(json => updateData(json))
 
-        fetch('https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/coaid.json').then(data => data.json()).
-            then(json => updateData(json))
+
+        const malurl = 'https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/cdn/malcoaid.json'
+        const engurl = 'https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/cdn/engcoaid.json'
 
 
-        function updateData(data) {
-            const ul = document.querySelector('.ul')
+        const langtrigger = document.getElementById('langtrigger')
+        const title = document.querySelector('.title')
+        const subtitle = document.querySelector('.subtitle')
+        const ulcontainer = document.querySelector('.ul-container')
 
-            data.forEach(element => {
 
-                console.log(element);
-                ul.innerHTML += `          <div class="container">
-                    <div class="box mb-2 has-text-centered">${element}</div>
-                    </div>
-`
+
+
+        const fetchdata = async (url) => {
+            try {
+                console.log(url);
+                const data = await fetch(url)
+                const jsondata = await data.json()
+                console.log(jsondata);
+                updatebody(jsondata)
+            } catch (error) {
+                console.log(error);
+                // location.reload()
+            }
+        }
+
+
+        const updatebody = (data) => {
+
+            const dbuttontext = data['buttonText']
+            const dtitle = data['title']
+            const dsubtitle = data['subtitle']
+            const dbullet = data['bulletpoints']
+
+
+            langtrigger.innerHTML = dbuttontext
+            title.innerHTML = dtitle
+            subtitle.innerHTML = dsubtitle
+
+
+            dbullet.forEach(element => {
+
+                try {
+                    if (element["sources"].length > 0) {
+
+                        template = `<div class="box mb-2 has-text-centered">${element['text']}  `
+
+                        element["sources"].forEach(elem => {
+                            template += `<a href="${elem}">Ref</a>,`
+                        })
+                        template += '</div>'
+
+                        ulcontainer.innerHTML += template
+
+                    }
+                } catch (error) {
+                    ulcontainer.innerHTML += ` <div class="box mb-2 has-text-centered">${element}</div>`
+
+                }
+
+
             });
+            langtrigger.classList.remove('is-loading') // remove the loading once fetch finished
+
+        }
+
+        const triggerHandler = (e) => {
+            console.log('here i am');
+            langtrigger.classList.add('is-loading')
+
+            // e.preventDefault()
+            if (langtrigger.getAttribute('data-eng') == 'true') {
+                langtrigger.classList.add('is-link')
+                fetchdata(malurl)
+                langtrigger.setAttribute('data-eng', 'false')
+            } else if (langtrigger.getAttribute('data-eng') == 'false') {
+                langtrigger.classList.remove('is-link')
+                fetchdata(engurl)
+                langtrigger.setAttribute('data-eng', 'true')
+            }
 
 
         }
 
-        //   const ul = document.querySelector('.ul');
 
+        fetchdata(engurl) // starting in english
+
+
+        langtrigger.addEventListener('click', triggerHandler)
+        //   const ul = document.querySelector('.ul');
     </script>
 </body>
 

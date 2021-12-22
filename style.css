@@ -1,5 +1,13 @@
-
-
-.box{
+.box {
     background-color: wheat;
+    padding: 0.75rem;
+    padding: auto 0;
+}
+
+.hero-body {
+    padding: 2rem;
+}
+
+.button {
+    border-radius: 0;
 }
