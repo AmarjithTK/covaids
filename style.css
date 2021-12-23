@@ -12,3 +12,8 @@
 .button {
     border-radius: 0;
 }
+
+.not-round {
+    border-radius: 0;
+    /* padding: 0.5rem; */
+}

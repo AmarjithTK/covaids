@@ -15,7 +15,7 @@
 
 
     <section class="hero has-background-warning	">
-        <div class="box has-text-centered has-background-warning">
+        <div class="box has-text-centered not-round">
             <button class="button is-dark is-inline-block" id="langtrigger" data-eng="true"> Malayalam Version</button>
         </div>
         <div class="hero-body has-text-centered">
@@ -40,6 +40,40 @@
         </ul>
     </section>
 
+    <div class="modal is-active ">
+        <div class="modal-background is-dark">
+        </div>
+        <div class="modal-content">
+            <!-- 
+            <div class="container has-background-danger centered">
+                <h2 class="subtitle">Disclaimer</h2>
+                <h1 class="title">Content provided from this page may not be 100 % accurate</h1>
+            </div> -->
+
+
+            <div class="hero m-2">
+                <div class="hero-body has-background-white is-flex is-justify-content-center is-align-items-center">
+                    <div class="wrapper has-text-centered">
+                        <h1 class="title">Covid vaccine Informed consent</h1>
+                        <hr>
+                        <h1 class="title is-4">Disclaimer</h1>
+                        <h1 class="px-4 py-2 subtitle is-size-6 has-text-weight-medium">contents and opinions provided in this page might not be 100% accurate , any decision you make on the basis of anything you read here will be completely yours and <span class="is-underlined has-text-weight-bold is-size-5">we hold no responsiblity whatsoever</span>
+
+                        </h1>
+
+                        <a href="https://google.co.in" class="button mb-1 is-danger is-inline-block">I disagree , redirect me to google</a>
+                        <button class=" button is-primary is-inline-block agree">I agree completely, continue to page</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
 
     <script>
         // fetch('https://raw.githubusercontent.com/AmarjithTK/storage__bin/master/coaid.json').then(data => data.json()).
@@ -55,7 +89,8 @@
         const subtitle = document.querySelector('.subtitle')
         const ulcontainer = document.querySelector('.ul-container')
 
-
+        const agreebtn = document.querySelector('.agree')
+        const modal = document.querySelector('.modal')
 
 
         const fetchdata = async (url) => {
@@ -134,6 +169,10 @@
 
 
         langtrigger.addEventListener('click', triggerHandler)
+
+        agreebtn.addEventListener('click', (e) => {
+            modal.classList.remove('is-active')
+        })
         //   const ul = document.querySelector('.ul');
     </script>
 </body>
