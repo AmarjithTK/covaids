@@ -54,15 +54,15 @@
             <div class="hero m-2">
                 <div class="hero-body has-background-warning is-flex is-justify-content-center is-align-items-center">
                     <div class="wrapper has-text-centered">
-                        <h1 class="title disclaim-heading">Covid vaccine Informed consent</h1>
-                        <hr class="has-text-centered pt-1" width="100%">
+                        <h1 class="disclaim-heading is-size-4 has-text-weight-bold">Covid vaccine Informed consent</h1>
+                        <hr class="has-text-centered is-inline-block pt-1" width="50%">
                         <h1 class="title is-4 disclaim-title">Disclaimer</h1>
-                        <h1 class="px-4 py-2 subtitle is-size-6 has-text-weight-medium disclaim-content">contents and opinions provided in this page might not be 100% accurate , any decision you make on the basis of anything you read here will be completely yours and <span class="is-underlined has-text-weight-bold is-size-5">we hold no responsiblity whatsoever</span>
+                        <h1 class="px-4 py-1 subtitle is-size-6 has-text-weight-medium disclaim-content">contents and opinions provided in this page might not be 100% accurate , any decision you make on the basis of anything you read here will be completely yours and <span class="is-underlined has-text-weight-bold is-size-5">we hold no responsiblity whatsoever</span>
 
                         </h1>
 
-                        <a href="https://google.co.in" class="disclaim-yes button  mb-1 is-danger is-inline-block">I disagree , redirect me to google</a>
-                        <button class="disclaim-no button is-success is-inline-block agree">I agree completely, continue to page</button>
+                        <a href="https://google.co.in" class="disclaim-btn disclaim-no button is-size-6 is-size-7-mobile mb-1 is-danger is-inline-block">I disagree , redirect me to google</a>
+                        <button class="disclaim-btn disclaim-yes button is-success is-size-6 is-size-7-mobile is-inline-block agree">I agree completely, continue to page</button>
 
                     </div>
 
@@ -171,6 +171,7 @@
 
         }
 
+
         const triggerHandler = (e) => {
             console.log('here i am');
             langtrigger.classList.add('is-loading')
@@ -179,18 +180,23 @@
             if (langtrigger.getAttribute('data-eng') == 'true') {
                 langtrigger.classList.remove('is-link')
                 fetchdata(malurl, false)
+                localStorage.setItem('lang', 'mal')
+
                 langtrigger.setAttribute('data-eng', 'false')
             } else if (langtrigger.getAttribute('data-eng') == 'false') {
                 langtrigger.classList.add('is-link')
                 fetchdata(engurl, false)
                 langtrigger.setAttribute('data-eng', 'true')
+                localStorage.setItem('lang', 'eng')
+
             }
 
 
         }
 
+        const defaultUrl = localStorage.getItem('lang') == 'eng' ? engurl : malurl
 
-        fetchdata(malurl, true) // starting in english
+        fetchdata(defaultUrl, true) // starting in english
 
 
         langtrigger.addEventListener('click', triggerHandler)
