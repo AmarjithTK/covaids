@@ -16,7 +16,7 @@
 
     <section class="hero has-background-warning	">
         <div class="box has-text-centered not-round">
-            <button class="button is-dark is-inline-block" id="langtrigger" data-eng="true"> Malayalam Version</button>
+            <button class="button is-dark is-inline-block" id="langtrigger" data-eng="false"> Malayalam Version</button>
         </div>
         <div class="hero-body has-text-centered">
             <p class="title">
@@ -52,17 +52,17 @@
 
 
             <div class="hero m-2">
-                <div class="hero-body has-background-white is-flex is-justify-content-center is-align-items-center">
+                <div class="hero-body has-background-warning is-flex is-justify-content-center is-align-items-center">
                     <div class="wrapper has-text-centered">
-                        <h1 class="title">Covid vaccine Informed consent</h1>
-                        <hr>
-                        <h1 class="title is-4">Disclaimer</h1>
-                        <h1 class="px-4 py-2 subtitle is-size-6 has-text-weight-medium">contents and opinions provided in this page might not be 100% accurate , any decision you make on the basis of anything you read here will be completely yours and <span class="is-underlined has-text-weight-bold is-size-5">we hold no responsiblity whatsoever</span>
+                        <h1 class="title disclaim-heading">Covid vaccine Informed consent</h1>
+                        <hr class="has-text-centered pt-1" width="100%">
+                        <h1 class="title is-4 disclaim-title">Disclaimer</h1>
+                        <h1 class="px-4 py-2 subtitle is-size-6 has-text-weight-medium disclaim-content">contents and opinions provided in this page might not be 100% accurate , any decision you make on the basis of anything you read here will be completely yours and <span class="is-underlined has-text-weight-bold is-size-5">we hold no responsiblity whatsoever</span>
 
                         </h1>
 
-                        <a href="https://google.co.in" class="button mb-1 is-danger is-inline-block">I disagree , redirect me to google</a>
-                        <button class=" button is-primary is-inline-block agree">I agree completely, continue to page</button>
+                        <a href="https://google.co.in" class="disclaim-yes button  mb-1 is-danger is-inline-block">I disagree , redirect me to google</a>
+                        <button class="disclaim-no button is-success is-inline-block agree">I agree completely, continue to page</button>
 
                     </div>
 
@@ -92,18 +92,41 @@
         const agreebtn = document.querySelector('.agree')
         const modal = document.querySelector('.modal')
 
+        const disheading = document.querySelector('.disclaim-heading')
+        const distitle = document.querySelector('.disclaim-title')
+        const discontent = document.querySelector('.disclaim-content')
+        const disyes = document.querySelector('.disclaim-yes')
+        const disno = document.querySelector('.disclaim-no')
 
-        const fetchdata = async (url) => {
+
+
+
+
+
+        const fetchdata = async (url, firstfetch) => {
             try {
                 console.log(url);
                 const data = await fetch(url)
                 const jsondata = await data.json()
                 console.log(jsondata);
+                if (firstfetch) {
+                    updatePopup(jsondata)
+                }
                 updatebody(jsondata)
             } catch (error) {
                 console.log(error);
                 // location.reload()
             }
+        }
+
+        const updatePopup = (data) => {
+
+            disheading.innerHTML = data['title']
+            distitle.innerHTML = data['disclaimerTitle']
+            discontent.innerHTML = data['disclaimer']
+            disyes.innerHTML = data['buttonYes']
+            disno.innerHTML = data['buttonNo']
+
         }
 
 
@@ -113,6 +136,8 @@
             const dtitle = data['title']
             const dsubtitle = data['subtitle']
             const dbullet = data['bulletpoints']
+
+
 
 
             langtrigger.innerHTML = dbuttontext
@@ -152,12 +177,12 @@
 
             // e.preventDefault()
             if (langtrigger.getAttribute('data-eng') == 'true') {
-                langtrigger.classList.add('is-link')
-                fetchdata(malurl)
+                langtrigger.classList.remove('is-link')
+                fetchdata(malurl, false)
                 langtrigger.setAttribute('data-eng', 'false')
             } else if (langtrigger.getAttribute('data-eng') == 'false') {
-                langtrigger.classList.remove('is-link')
-                fetchdata(engurl)
+                langtrigger.classList.add('is-link')
+                fetchdata(engurl, false)
                 langtrigger.setAttribute('data-eng', 'true')
             }
 
@@ -165,7 +190,7 @@
         }
 
 
-        fetchdata(engurl) // starting in english
+        fetchdata(malurl, true) // starting in english
 
 
         langtrigger.addEventListener('click', triggerHandler)
