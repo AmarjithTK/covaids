@@ -91,30 +91,30 @@
         const subtitle = document.querySelector('.subtitle')
         const ulcontainer = document.querySelector('.ul-container')
 
-        const agreebtn = document.querySelector('.agree')
-        const modal = document.querySelector('.modal')
+        // const agreebtn = document.querySelector('.agree')
+        // const modal = document.querySelector('.modal')
 
-        const disheading = document.querySelector('.disclaim-heading')
-        const distitle = document.querySelector('.disclaim-title')
-        const discontent = document.querySelector('.disclaim-content')
-        const disyes = document.querySelector('.disclaim-yes')
-        const disno = document.querySelector('.disclaim-no')
-
-
+        // const disheading = document.querySelector('.disclaim-heading')
+        // const distitle = document.querySelector('.disclaim-title')
+        // const discontent = document.querySelector('.disclaim-content')
+        // const disyes = document.querySelector('.disclaim-yes')
+        // const disno = document.querySelector('.disclaim-no')
 
 
 
 
 
-        const fetchdata = async (url, firstfetch) => {
+
+
+        const fetchdata = async (url) => {
             try {
                 console.log(url);
                 const data = await fetch(url)
                 const jsondata = await data.json()
                 console.log(jsondata);
-                if (firstfetch) {
-                    updatePopup(jsondata)
-                }
+                // if (firstfetch) {
+                //     updatePopup(jsondata)
+                // }
                 updatebody(jsondata)
             } catch (error) {
                 console.log(error);
@@ -122,15 +122,15 @@
             }
         }
 
-        const updatePopup = (data) => {
+        // const updatePopup = (data) => {
 
-            disheading.innerHTML = data['title']
-            distitle.innerHTML = data['disclaimerTitle']
-            discontent.innerHTML = data['disclaimer']
-            disyes.innerHTML = data['buttonYes']
-            disno.innerHTML = data['buttonNo']
+        //     disheading.innerHTML = data['title']
+        //     distitle.innerHTML = data['disclaimerTitle']
+        //     discontent.innerHTML = data['disclaimer']
+        //     disyes.innerHTML = data['buttonYes']
+        //     disno.innerHTML = data['buttonNo']
 
-        }
+        // }
 
 
         const updatebody = (data) => {
@@ -182,13 +182,13 @@
             // e.preventDefault()
             if (langtrigger.getAttribute('data-eng') == 'true') {
                 langtrigger.classList.remove('is-link')
-                fetchdata(malurl, false)
+                fetchdata(malurl)
                 localStorage.setItem('lang', 'mal')
 
                 langtrigger.setAttribute('data-eng', 'false')
             } else if (langtrigger.getAttribute('data-eng') == 'false') {
                 langtrigger.classList.add('is-link')
-                fetchdata(engurl, false)
+                fetchdata(engurl)
                 langtrigger.setAttribute('data-eng', 'true')
                 localStorage.setItem('lang', 'eng')
 
